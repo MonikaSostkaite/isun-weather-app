@@ -13,11 +13,12 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
+import { useAuth } from '../../hooks/useAuth';
+
 const AppNavigationBar = ({ pages }) => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const navigate = useNavigate();
-    const user = '';
-    const logout = () => {};
+    const { token, logout } = useAuth();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -80,7 +81,7 @@ const AppNavigationBar = ({ pages }) => {
                                     <Typography textAlign="center">{page.label}</Typography>
                                 </MenuItem>
                             ))}
-                            {!!user && (
+                            {!!token && (
                                 <MenuItem key="logout" onClick={logout}>
                                     <Typography textAlign="center">Logout</Typography>
                                 </MenuItem>
@@ -105,7 +106,7 @@ const AppNavigationBar = ({ pages }) => {
                                 {page.label}
                             </Button>
                         ))}
-                        {!!user && (
+                        {!!token && (
                             <Button
                                 key="logout"
                                 onClick={logout}

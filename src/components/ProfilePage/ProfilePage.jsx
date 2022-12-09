@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Card from '@mui/joy/Card';
 import Avatar from '@mui/material/Avatar';
 import Person from '@mui/icons-material/Person';
 import Container from '@mui/material/Container';
@@ -20,6 +21,9 @@ const ProfilePage = () => (
             <Typography component="h1" variant="h5">
                 Profile Page
             </Typography>
+            <Card variant="outlined">
+                <Typography>Weather card to be</Typography>
+            </Card>
         </Box>
     </Container>
 );

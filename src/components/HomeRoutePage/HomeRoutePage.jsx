@@ -1,12 +1,13 @@
 import { Navigate, useOutlet } from 'react-router-dom';
 
+import { useAuth } from '../../hooks/useAuth';
 import AppNavigationBar from '../AppNavigationBar/AppNavigationBar';
 
 const HomeRoutePage = () => {
-    const user = '';
+    const { token } = useAuth();
     const outlet = useOutlet();
 
-    if (user) {
+    if (token) {
         return <Navigate to="/dashboard/profile" replace />;
     }
 
