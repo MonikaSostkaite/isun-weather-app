@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-promise-executor-return */
+/* eslint-disable react/prop-types */
+import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
-const App = () => (
-    <div className="App">
-        <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-                Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
-        </header>
-    </div>
+import HomePage from './components/HomePage/HomePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import AuthLayout from './components/AuthLayout/AuthLayout';
+import ProfilePage from './components/ProfilePage/ProfilePage';
+import HomeRoutePage from './components/HomeRoutePage/HomeRoutePage';
+import ProtectedRoutePage from './components/ProtectedRoutePage/ProtectedRoutePage';
+
+export const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route element={<AuthLayout />}>
+            <Route element={<HomeRoutePage />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+            </Route>
+
+            <Route path="/dashboard" element={<ProtectedRoutePage />}>
+                <Route path="profile" element={<ProfilePage />} />
+            </Route>
+        </Route>
+    )
 );
-
-export default App;
