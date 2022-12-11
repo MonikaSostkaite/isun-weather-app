@@ -1,5 +1,3 @@
-// import { Link as RouterLink } from 'react-router-dom';
-
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -59,7 +57,13 @@ const LoginPage = () => {
                         id="password"
                         autoComplete="current-password"
                     />
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                    <Button
+                        type="submit"
+                        data-testid="logIn"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
                         Login In
                     </Button>
                 </Box>

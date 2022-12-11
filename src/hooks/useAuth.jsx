@@ -16,7 +16,7 @@ axios.create({
     },
 });
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useLocalStorage({ keyName: 'token', defaultValue: null });
