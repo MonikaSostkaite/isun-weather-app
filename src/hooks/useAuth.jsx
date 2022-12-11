@@ -16,10 +16,21 @@ export const AuthProvider = ({ children }) => {
 
     const onLogin = async ({ username, password }) => {
         axios
-            .post(`${baseURL}authorize`, {
-                username,
-                password,
-            })
+            .post(
+                `${baseURL}authorize`,
+                {
+                    username,
+                    password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'text/plain',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Credentials': true,
+                        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    },
+                }
+            )
             .then(({ data }) => {
                 setToken(data.token);
                 navigate('/dashboard/profile');
