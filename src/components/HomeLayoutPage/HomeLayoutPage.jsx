@@ -1,9 +1,9 @@
 import { Navigate, useOutlet } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
-import AppNavigationBar from '../AppNavigationBar/AppNavigationBar';
+import NavigationBar from '../NavigationBar/NavigationBar';
 
-const HomeRoutePage = () => {
+const HomeLayoutPage = () => {
     const { token } = useAuth();
     const outlet = useOutlet();
 
@@ -13,7 +13,7 @@ const HomeRoutePage = () => {
 
     return (
         <div>
-            <AppNavigationBar
+            <NavigationBar
                 pages={[
                     { label: 'Home', path: '/' },
                     { label: 'Login', path: '/login' },
@@ -24,4 +24,4 @@ const HomeRoutePage = () => {
     );
 };
 
-export default HomeRoutePage;
+export default HomeLayoutPage;

@@ -1,95 +1,30 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useAuth } from '../../hooks/useAuth';
 
-const baseURL = 'https://weather-api.isun.ch/api/';
-
-const CitiesAutocomplete = ({ onChange }) => {
-    const { token } = useAuth();
-    const [open, setOpen] = useState(false);
-    const [options, setOptions] = useState([]);
-    const loading = open && options.length === 0;
-
-    useEffect(() => {
-        let active = true;
-
-        if (!loading) {
-            return undefined;
-        }
-
-        (async () => {
-            const config = {
-                method: 'get',
-                url: `${baseURL}cities`,
-                headers: {
-                    Authorization: token,
-                },
-            };
-            axios(config)
-                .then((response) => {
-                    if (active) {
-                        setOptions([...response.data]);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        })();
-
-        return () => {
-            active = false;
-        };
-    }, [loading]);
-
-    useEffect(() => {
-        if (!open) {
-            setOptions([]);
-        }
-    }, [open]);
-
-    return (
+const CitiesAutocomplete = ({ onChange, options }) => (
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '300px', mt: 8 }}>
+        <Typography sx={{ flex: '0 0 100%' }} fontSize="lg" fontWeight="lg">
+            Search city to check weather
+        </Typography>
         <Autocomplete
+            disablePortal
             id="cities-autocomplete"
-            sx={{ width: 300 }}
-            open={open}
-            onOpen={() => {
-                setOpen(true);
-            }}
-            onClose={() => {
-                setOpen(false);
-            }}
-            onChange={onChange}
-            isOptionEqualToValue={(option, value) => option === value}
-            getOptionLabel={(option) => option}
             options={options}
-            loading={loading}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    label="Cities"
-                    InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                            <>
-                                {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                {params.InputProps.endAdornment}
-                            </>
-                        ),
-                    }}
-                />
-            )}
+            sx={{ flex: '0 0 100%', mt: 1 }}
+            renderInput={(params) => <TextField {...params} label="City" />}
+            onChange={onChange}
         />
-    );
-};
+    </Box>
+);
 
 CitiesAutocomplete.propTypes = {
     onChange: PropTypes.func.isRequired,
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default CitiesAutocomplete;

@@ -1,9 +1,9 @@
 import { Navigate, useOutlet } from 'react-router-dom';
 
-import AppNavigationBar from '../AppNavigationBar/AppNavigationBar';
 import { useAuth } from '../../hooks/useAuth';
+import NavigationBar from '../NavigationBar/NavigationBar';
 
-const ProtectedRoutePage = () => {
+const ProtectedLayoutPage = () => {
     const { token } = useAuth();
     const outlet = useOutlet();
 
@@ -12,10 +12,10 @@ const ProtectedRoutePage = () => {
     }
     return (
         <div>
-            <AppNavigationBar pages={[{ label: 'Profile', path: 'profile' }]} />
+            <NavigationBar pages={[{ label: 'Profile', path: 'profile' }]} />
             {outlet}
         </div>
     );
 };
 
-export default ProtectedRoutePage;
+export default ProtectedLayoutPage;

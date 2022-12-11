@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -9,12 +10,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAuth } from '../../hooks/useAuth';
 
 const LoginPage = () => {
-    const { login } = useAuth();
+    const { error, onLogin } = useAuth();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        login({
+        onLogin({
             username: data.get('username'),
             password: data.get('password'),
         });
@@ -38,6 +39,7 @@ const LoginPage = () => {
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
+                        error={error}
                         margin="normal"
                         required
                         fullWidth
@@ -48,6 +50,7 @@ const LoginPage = () => {
                         autoFocus
                     />
                     <TextField
+                        error={error}
                         margin="normal"
                         required
                         fullWidth
@@ -66,6 +69,7 @@ const LoginPage = () => {
                     >
                         Login In
                     </Button>
+                    {error && <Alert severity="error">{error}</Alert>}
                 </Box>
             </Box>
         </Container>

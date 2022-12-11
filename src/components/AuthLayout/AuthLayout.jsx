@@ -10,12 +10,12 @@ import { AuthProvider } from '../../hooks/useAuth';
 const AuthLayout = () => {
     const outlet = useOutlet();
 
-    const { userPromise } = useLoaderData();
+    const { loadingData } = useLoaderData();
 
     return (
         <Suspense fallback={<LinearProgress />}>
             <Await
-                resolve={userPromise}
+                resolve={loadingData}
                 errorElement={<Alert severity="error">Error loading page!</Alert>}
                 children={(user) => <AuthProvider userData={user}>{outlet}</AuthProvider>}
             />

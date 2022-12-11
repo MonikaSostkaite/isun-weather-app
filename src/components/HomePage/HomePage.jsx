@@ -18,7 +18,17 @@ const HomePage = () => (
                 <Home />
             </Avatar>
             <Typography component="h1" variant="h5">
-                Home page
+                Welcome
+            </Typography>
+            <img
+                style={{ width: '400px', height: '400px', margin: '30px auto' }}
+                align="center"
+                src="/media/weatherForecast.jpg"
+                loading="lazy"
+                alt=""
+            />
+            <Typography variant="h5" align="center" sx={{ alignContent: 'center' }}>
+                To see weather forecast please login
             </Typography>
         </Box>
     </Container>
