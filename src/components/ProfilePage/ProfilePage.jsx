@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { useAuth } from '../../hooks/useAuth';
-import { DEFAULT_CITY } from '../../constants';
+import { DEFAULT_CITY, FETCH_DATA_TIME } from '../../constants';
 import { useWeather } from '../../hooks/useWeather';
 import WeatherCard from '../WeatherCard/WeatherCard';
 import CitiesAutocomplete from '../CitiesAutocomplete/CitiesAutocomplete';
@@ -27,10 +27,18 @@ const ProfilePage = () => {
     }, []);
 
     useEffect(() => {
-        (async () => {
+        const fetchWeatherData = async () => {
             const weatherData = await getCityWeather();
             setWeather(weatherData);
-        })();
+        };
+
+        const id = setInterval(() => {
+            fetchWeatherData();
+        }, FETCH_DATA_TIME);
+
+        fetchWeatherData();
+
+        return () => clearInterval(id);
     }, [city]);
 
     const handleChange = (event, value) => {
